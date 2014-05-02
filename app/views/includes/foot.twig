@@ -1,0 +1,32 @@
+<script type="text/javascript" src="{{app.request.baseUrl}}/public/vendor/jquery/dist/jquery.min.js">
+</script>
+<script type="text/javascript" src="{{app.request.baseUrl}}/public/vendor/bootstrap/dist/js/bootstrap.min.js">
+</script>
+<!-- 
+<script>
+	var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
+	(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+	g.src='//www.google-analytics.com/ga.js';
+	s.parentNode.insertBefore(g,s)}(document,'script'));
+</script>
+-->
+<!-- Angular JS -->
+<script type="text/javascript" src="/public/vendor/angular/angular.min.js"></script>
+<script type="text/javascript" src="{{app.request.baseUrl}}/public/vendor/angular-cookies/angular-cookies.min.js"></script>
+<script type="text/javascript" src="{{app.request.baseUrl}}/public/vendor/angular-resource/angular-resource.min.js"></script>
+<script type="text/javascript" src="{{app.request.baseUrl}}/public/vendor/angular-ui-router/release/angular-ui-router.js"></script>
+
+
+<!-- Angular UI -->
+<script type="text/javascript" src="{{app.request.baseUrl}}/public/vendor/angular-bootstrap/ui-bootstrap.js"></script>
+<script type="text/javascript" src="{{app.request.baseUrl}}/public/vendor/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+
+<!-- Application Init -->
+<script type="text/javascript" src="{{app.request.baseUrl}}/public/init.js"></script>
+
+<!-- -->
+{% for file in assetsJs %}
+	<script type="text/javascript" src="{{file}}"></script>
+{% endfor %}
+
+

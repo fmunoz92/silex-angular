@@ -1,0 +1,14 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="https://www.facebook.com/2008/fbml" itemscope="itemscope" itemtype="http://schema.org/Product">
+    {% include 'includes/head.twig' %}
+    <body>
+        <div class="navbar navbar-inverse navbar-fixed-top" data-ng-include="'/public/system/views/header.html'" data-role="navigation"></div>
+        <section class="content" style="margin-top:50px;">
+            <section class="container">
+                {% block content %}{% endblock %}
+            </section>
+        </section>
+        {% include 'includes/foot.twig' %}
+        {% block bottom_scripts %}{% endblock %}
+    </body>
+</html>

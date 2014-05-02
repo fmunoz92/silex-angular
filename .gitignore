@@ -1,0 +1,5 @@
+.DS_Store
+vendor
+public/vendor
+composer.lock
+temp/*

@@ -1,0 +1,10 @@
+{% extends 'layouts/layout.twig' %}
+{% block content %}
+    <section data-ui-view ></section>
+    <script type="text/javascript">
+        window.user = {{user | raw}};
+    </script>
+{% endblock %}
+
+{% block bottom_scripts %}
+{% endblock %}

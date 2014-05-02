@@ -1,0 +1,15 @@
+{
+	"name": "silex-angular",
+	"version": "0.0.1",
+	"dependencies": {
+		"angular": "latest",
+		"angular-resource": "latest",
+		"angular-cookies": "latest",
+		"angular-mocks": "latest",
+		"angular-route": "latest",
+		"bootstrap": "3.0.0",
+		"angular-bootstrap": "0.10.0",
+		"angular-ui-router": "#master",
+		"ng-file-upload": "1.3.1"
+	}
+}

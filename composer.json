@@ -1,0 +1,20 @@
+{
+	"minimum-stability":"dev",
+    "require": {
+        "silex/silex": "*",
+        "taluu/doctrine-orm-provider": "*",
+        "monolog/monolog":"*",
+        "symfony/monolog-bridge": "*",
+        "twig/twig": "*",
+        "symfony/twig-bridge":"*"
+    },
+    "autoload": {
+        "classmap": [
+            "app/controllers/",
+            "app/managers/",
+            "app/repositories/",
+            "app/entities/",
+            "config"
+        ]
+    }  
+}
