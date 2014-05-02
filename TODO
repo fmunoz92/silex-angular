@@ -1,0 +1,6 @@
+- User session by provider
+- autoload without "composer dumpautoload"
+- validations
+- use DI and IoC in entities
+- provide admin panel
+- menues controller
