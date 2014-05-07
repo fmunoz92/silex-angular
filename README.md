@@ -7,7 +7,7 @@
 
 ## Quick Install
 
-update data base params in app/config/dbs/db.php
+update data base params in config/dbs/db.php
 
 ```
 $ composer install
