@@ -1,9 +1,9 @@
 ## Requirements
 
-PHP 5.5.3 at least
-Mysql 5 
-bower http://bower.io/
-composer https://getcomposer.org
+- PHP 5.5.3 at least
+- Mysql 5 
+- bower http://bower.io/
+- composer https://getcomposer.org
 
 ## Quick Install
 
