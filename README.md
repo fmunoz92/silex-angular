@@ -1,6 +1,13 @@
+## Requirements
+
+PHP 5.5.3 at least
+Mysql 5 
+bower http://bower.io/
+composer https://getcomposer.org
+
 ## Quick Install
 
-update app/config/dbs/db.php
+update data base params in app/config/dbs/db.php
 
 ```
 $ composer install
