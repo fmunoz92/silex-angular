@@ -4,7 +4,9 @@ namespace App {
 
 	use Doctrine\Common\Util\Inflector;
 
-	use Doctrine\ORM\EntityManager;
+    use Doctrine\ORM\EntityManager;
+	use Doctrine\ORM\Mapping\ClassMetadata;
+    use Doctrine\ORM\Configuration;
 
 	class ActiveEntityRegistry
 	{
@@ -82,9 +84,6 @@ namespace App {
 	}
 
 
-use Doctrine\ORM\Configuration,
-	Doctrine\ORM\Mapping\ClassMetadata;
-
 
 
 
@@ -134,9 +133,9 @@ trait ActiveEntity
 
             $assoc = $this->doctrineClassMetadata->associationMappings[$field];
             if (!($args[0] instanceof $assoc['targetEntity'])) {
-                throw new \InvalidArgumentException(
-                    "Expected entity of type '".$assoc['targetEntity']."'"
-                );
+                $value = $this->doctrineEntityManager->getReference($assoc['targetEntity'], $args[0]);
+                $this->$field = $value;
+                return;
             }
 
             if ($assoc['type'] & ClassMetadata::ONE_TO_ONE && !$assoc['isOwning']) {
