@@ -1,6 +1,22 @@
+## REST API PHP Silex + Angular + Bootstrap
+
+Technologies and Frameworks
+
+- Silex http://silex.sensiolabs.org
+- Doctrine 2 ORM http://www.doctrine-project.org/
+- Angular.js https://angularjs.org
+- Bootstrap 3 http://getbootstrap.com
+
+## Requirements
+
+- PHP 5.5.3 at least
+- Mysql 5 
+- bower http://bower.io/
+- composer https://getcomposer.org
+
 ## Quick Install
 
-update app/config/dbs/db.php
+update data base params in config/dbs/db.php
 
 ```
 $ composer install
