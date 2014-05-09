@@ -12,8 +12,8 @@ use App\ActiveEntity;
  */
 class User {
 
-	use ActiveEntity;
-	use SerializableEntity;
+    use ActiveEntity;
+    use SerializableEntity;
 
     /** 
      * @Id @Column(type="integer")

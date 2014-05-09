@@ -2,15 +2,15 @@
 
 namespace App\Controller {
 
-	use Silex\Application;
+    use Silex\Application;
 
-	class IndexCtr extends BaseController {
+    class IndexCtr extends BaseController {
 
-		function index(Application $app) {
-			return $app["twig"]->render("index.twig");
-		}
+        function index(Application $app) {
+            return $app["twig"]->render("index.twig");
+        }
 
-	}
+    }
 }
 
 ?>
