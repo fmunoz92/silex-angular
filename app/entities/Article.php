@@ -33,7 +33,7 @@ class Article {
      * @PrePersist @PreUpdate
      */
     public function assertTitleNotEmpty() {
-        if($this->getTitle() == "" || $this->getTitle() == null) {
+        if(trim($this->getTitle()) == "" || $this->getTitle() == null) {
             throw new Exception("The title can not be empty");
         }
     }
@@ -42,7 +42,7 @@ class Article {
      * @PrePersist @PreUpdate
      */
     public function assertTitleLength() {
-        if(strlen($this->getTitle()) > 10) {
+        if(strlen(trim($this->getTitle())) > 10) {
             throw new Exception("The title must have 10 chars at least");
         }
     }

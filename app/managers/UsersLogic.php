@@ -4,6 +4,7 @@ namespace App\BusinessLogic {
 
 	use Doctrine\ORM\EntityRepository;
 	use Doctrine\ORM\EntityManager;
+	use Symfony\Component\HttpFoundation\Session\Session;
 
 	/**
 	* 
@@ -11,8 +12,9 @@ namespace App\BusinessLogic {
 	class UsersLogic {
 		
 		protected $dataAccess;
+		protected $em;
 
-		public function __construct(EntityRepository $dataAccess, EntityManager $em, $session) {
+		public function __construct(EntityRepository $dataAccess, EntityManager $em, Session $session) {
 			$this->dataAccess = $dataAccess;
 			$this->session = $session;
 			$this->em = $em;

@@ -4,6 +4,7 @@ namespace App\DataAccessLayer {
 
 	use Doctrine\ORM\EntityRepository;
 	use App\Entity\Article;
+	use Exception;
 
 	class ArticleRepository extends EntityRepository {
 

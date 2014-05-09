@@ -4,6 +4,7 @@ namespace App\BusinessLogic {
 
 	use Doctrine\ORM\EntityRepository;
 	use Doctrine\ORM\EntityManager;
+	use Exception;
 
 	/**
 	* 
@@ -11,6 +12,7 @@ namespace App\BusinessLogic {
 	class ArticlesLogic {
 		
 		protected $dataAccess;
+		protected $em;
 
 		public function __construct(EntityRepository $dataAccess, EntityManager $em) {
 			$this->dataAccess = $dataAccess;
@@ -29,15 +31,26 @@ namespace App\BusinessLogic {
 		}
 
 		public function create($data) {
-			$article = $this->dataAccess->create($data);
-			$this->em->flush();
-			return $article->toArray();
+			try {
+				$article = $this->dataAccess->create($data);
+				$this->em->flush();
+				return $article->toArray();				
+			} 
+			catch (Exception $e) {
+				return array("err" => $e->getMessage(), "article" =>  $data);
+			}
+
 		}
 
 		public function update($id, $data) {
-			$article = $this->dataAccess->update($id, $data);
-			$this->em->flush();
-			return $article->toArray();
+			try {
+				$article = $this->dataAccess->update($id, $data);
+				$this->em->flush();
+				return $article->toArray();				
+			} 
+			catch (Exception $e) {
+				return array("err" => $e->getMessage(), "article" =>  $data);
+			}
 		}
 
 		public function destroy($id) {
