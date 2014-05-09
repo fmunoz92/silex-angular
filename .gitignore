@@ -2,4 +2,3 @@
 vendor
 public/vendor
 composer.lock
-temp/*
