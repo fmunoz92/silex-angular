@@ -17,12 +17,12 @@ $app->before(function(Symfony\Component\HttpFoundation\Request $req) use ($app) 
 
 
 $app->before(function(Symfony\Component\HttpFoundation\Request $req) use ($app) {
-	$app['twig'] = $app->share($app->extend('twig', function($twig, $app) {
-	    $user = $app["session"]->get("user") ? $app["session"]->get("user") : "0";
-	    $twig->addGlobal('user', $user);
+    $app['twig'] = $app->share($app->extend('twig', function($twig, $app) {
+        $user = $app["session"]->get("user") ? $app["session"]->get("user") : "0";
+        $twig->addGlobal('user', $user);
 
-	    return $twig;
-	}));
-});	
+        return $twig;
+    }));
+}); 
 
 ?>
