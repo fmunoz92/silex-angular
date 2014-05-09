@@ -15,6 +15,7 @@ class ArticleTest extends \PHPUnit_Framework_TestCase
     }
 
     public function tearDown() {
+        parent::tearDown();
         //remove all
         foreach ($this->delete as $entity) {
             $entity->remove();
