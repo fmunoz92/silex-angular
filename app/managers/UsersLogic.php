@@ -38,7 +38,7 @@ namespace App\BusinessLogic {
 
 		public function create($data) {
 			$user = $this->dataAccess->create($data);
-			$this->flush();
+			$this->em->flush();
 			return $user;
 		}
 	}

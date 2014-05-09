@@ -24,6 +24,12 @@ $ bower install
 $ php vendor/bin/doctrine orm:schema-tool:update --force
 ```
 
+## Run tests
+
+```
+$ php vendor/bin/phpunit --bootstrap tests/backendTests/bootstrap.php tests/backendTests/*/*
+```
+
 ## Run server
 
 ```

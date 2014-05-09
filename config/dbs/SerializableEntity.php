@@ -95,8 +95,7 @@ class ActiveEntityListener
         $em = $args->getEntityManager();
 
         $metadata = $em->getClassMetadata(get_class($entity));
-        //print_r($metadata->reflClass->getTraitNames());
-        //die();
+
         if (in_array("App\ActiveEntity", $metadata->reflClass->getTraitNames())) {
             $entity->setDoctrine($em, $metadata);
         }
@@ -120,7 +119,7 @@ trait ActiveEntity
         $this->doctrineClassMetadata = $classMetadata;
     }
 
-    private function set($field, $args)
+    public function set($field, $args)
     {
         if (isset($this->doctrineClassMetadata->fieldMappings[$field])) {
 
@@ -153,7 +152,7 @@ trait ActiveEntity
         }
     }
     
-    private function get($field)
+    public function get($field)
     {
         if ( (isset($this->doctrineClassMetadata->fieldMappings[$field]) && $this->doctrineClassMetadata->fieldMappings[$field]['type'] != "boolean") ||
             isset($this->doctrineClassMetadata->associationMappings[$field])) {
@@ -163,7 +162,7 @@ trait ActiveEntity
         }
     }
     
-    private function add($field, $args)
+    public function add($field, $args)
     {
         if (isset($this->doctrineClassMetadata->associationMappings[$field]) &&
             $this->doctrineClassMetadata->associationMappings[$field]['type'] & ClassMetadata::TO_MANY) {
@@ -208,7 +207,6 @@ trait ActiveEntity
      * @param array $args
      * @return mixed
      */
-    /*
     public function __call($method, $args)
     {
         // this happens if you call new on the entity.
@@ -230,7 +228,7 @@ trait ActiveEntity
             throw new \BadMethodCallException("There is no method ".$method." on ".$this->doctrineClassMetadata->name);
         }
     }
-    */
+
     
     public function persist()
     {
