@@ -14,8 +14,8 @@ use Exception;
  */
 class Article {
 
-	use ActiveEntity;
-	use SerializableEntity;
+    use ActiveEntity;
+    use SerializableEntity;
 
     /** 
      * @Id @Column(type="integer")
