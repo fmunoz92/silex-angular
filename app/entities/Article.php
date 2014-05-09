@@ -42,8 +42,8 @@ class Article {
      * @PrePersist @PreUpdate
      */
     public function assertTitleLength() {
-        if(strlen(trim($this->getTitle())) > 10) {
-            throw new Exception("The title must have 10 chars at least");
+        if(strlen(trim($this->getTitle())) < 3) {
+            throw new Exception("The title must have 3 chars at least");
         }
     }
 
