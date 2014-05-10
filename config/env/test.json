@@ -1,0 +1,8 @@
+{
+	"database": {
+		"host": "localhost-test",
+		"database": "silex",
+		"user": "root",
+		"password": "1"
+	}
+}

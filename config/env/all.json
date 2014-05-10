@@ -1,0 +1,15 @@
+{
+	"js": {
+		"include": [
+			{
+				"folder": "/public/system" 
+			},
+			{
+				"folder": "/public/auth" 
+			},
+			{
+				"folder": "/public/articles" 
+			}
+		]
+	}
+}
