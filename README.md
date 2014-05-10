@@ -16,7 +16,7 @@ Technologies and Frameworks
 
 ## Quick Install
 
-update data base params in config/dbs/db.php
+update data base params in config/env/develoment.json
 
 ```
 $ composer install
@@ -24,8 +24,14 @@ $ bower install
 $ php vendor/bin/doctrine orm:schema-tool:update --force
 ```
 
-## Run tests
+Create the database for tests then put the env var SILEX_MODE=test
+update test data base params in config/env/test.json
+```
+$ php vendor/bin/doctrine orm:schema-tool:update --force
+```
+Change SILEX_MODE to development.
 
+## Run tests
 ```
 $ php vendor/bin/phpunit --colors --bootstrap tests/backendTests/bootstrap.php tests/backendTests/*/*
 ```

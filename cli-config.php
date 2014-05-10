@@ -1,6 +1,5 @@
 <?php
 // cli-config.php
-putenv("SILEX_MODE=development");
 
 $app = require('app/app.php');
 $em = $app["db.orm.em"];
