@@ -75,10 +75,10 @@ class Config {
     }
 
     private static function configureDB() {
-        $activeEntityListener = new App\ActiveEntityListener();
+        $activeEntityListener = new ActiveEntityListener();
         self::$app['db.event_manager']->addEventListener(array(Doctrine\ORM\Events::postLoad), $activeEntityListener);
 
-        App\ActiveEntityRegistry::setDefaultManager(self::$app['db.orm.em']);
+        ActiveEntityRegistry::setDefaultManager(self::$app['db.orm.em']);
     }
 }
 

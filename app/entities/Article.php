@@ -3,8 +3,8 @@
 namespace App\Entity {
 
 
-use App\SerializableEntity;
-use App\ActiveEntity;
+use SerializableEntity;
+use ActiveEntity;
 use Exception;
 
 /**
