@@ -1,20 +1,36 @@
 <?php
 
-class Config {
 
-    private static $app = null;
-    private static $config = null;
+namespace App;
 
-    public static function load($app) {
-        self::$app = $app;
+use Silex\Application;
+use Silex\ServiceProviderInterface;
+use \RecursiveDirectoryIterator;
+use \RecursiveIteratorIterator;
+use \ActiveEntityListener;
+use \ActiveEntityRegistry;
+use \Doctrine\ORM\Events;
 
-        self::loadEnv();
-        self::includeConfigFiles();
-        self::includeJsFiles();
-        self::configureDB();
+
+class Config implements ServiceProviderInterface {
+
+    private $app = null;
+    private $config = null;
+
+    public function register(Application $app) {
+        $this->app = $app;
+
+        $this->loadEnv();
+        $this->includeConfigFiles();
+        $this->includeJsFiles();
+        $this->configureDB();
     }
 
-    private static function loadEnv() {
+    public function boot(Application $app)
+    {
+    }
+
+    private function loadEnv() {
         $env = getenv("SILEX_MODE");
         if(empty($env))
             $env = "development";
@@ -25,18 +41,18 @@ class Config {
         $jsonEnv = file_get_contents(ROOT . '/config/env/'. $env .'.json');
         $jsonAll = file_get_contents(ROOT . '/config/env/all.json');
 
-        self::$config = array_merge(json_decode($jsonAll, true), json_decode($jsonEnv, true));
+        $this->config = array_merge(json_decode($jsonAll, true), json_decode($jsonEnv, true));
     }
 
-    private static function includeJsFiles() {
+    private function includeJsFiles() {
         $files = array();
         
-        foreach (self::$config["js"]["include"] as $include) {     
+        foreach ($this->config["js"]["include"] as $include) {     
             $files = array_merge($files, self::getJsFiles(ROOT . $include["folder"]));
             $files = array_merge($files, self::getJsFiles(ROOT . $include["folder"] ."/*"));
         }
 
-        self::$app['twig'] = self::$app->share(self::$app->extend('twig', function($twig, $app) use ($files) {
+        $this->app['twig'] = $this->app->share($this->app->extend('twig', function($twig, $app) use ($files) {
             $twig->addGlobal('appName', "Silex Angular");
             $twig->addGlobal('title', "Full Stack");
             $twig->addGlobal('assetsJs', $files);
@@ -45,11 +61,11 @@ class Config {
         }));
     }
 
-    private static function includeConfigFiles() {
-        define("DB_HOST", self::$config["database"]["host"]);
-        define("DB_DATABASE", self::$config["database"]["database"]);
-        define("DB_USER", self::$config["database"]["user"]);
-        define("DB_PASSWORD", self::$config["database"]["password"]);
+    private function includeConfigFiles() {
+        define("DB_HOST", $this->config["database"]["host"]);
+        define("DB_DATABASE", $this->config["database"]["database"]);
+        define("DB_USER", $this->config["database"]["user"]);
+        define("DB_PASSWORD", $this->config["database"]["password"]);
 
         self::includeDir(ROOT . "/config/providers");
         self::includeDir(ROOT . "/config/services");
@@ -57,8 +73,8 @@ class Config {
         self::includeDir(APP_ROOT . "/routes");
     }
 
-    private static function includeDir($dir) {
-        $app = self::$app;
+    private function includeDir($dir) {
+        $app = $this->app;
         $it = new RecursiveDirectoryIterator($dir);
         foreach (new RecursiveIteratorIterator($it) as $filename => $cur) {
             if(is_file($filename))
@@ -74,11 +90,11 @@ class Config {
         return $files;
     }
 
-    private static function configureDB() {
+    private function configureDB() {
         $activeEntityListener = new ActiveEntityListener();
-        self::$app['db.event_manager']->addEventListener(array(Doctrine\ORM\Events::postLoad), $activeEntityListener);
+        $this->app['db.event_manager']->addEventListener(array(Events::postLoad), $activeEntityListener);
 
-        ActiveEntityRegistry::setDefaultManager(self::$app['db.orm.em']);
+        ActiveEntityRegistry::setDefaultManager($this->app['db.orm.em']);
     }
 }
 

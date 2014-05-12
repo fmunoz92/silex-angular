@@ -1,16 +1,16 @@
 <?php
 
-$app->get("/loggedin", "App\Controller\UserCtr::loggedin")
+$app->get("/loggedin", "users.controller:loggedin")
         ->bind("loggedin");
 
-$app->get("/logout", "App\Controller\UserCtr::logout")
+$app->get("/logout", "users.controller:logout")
         ->bind("logout");
 
-$app->post("/login", "App\Controller\UserCtr::login")
+$app->post("/login", "users.controller:login")
         ->bind("login")
         ->before(App\Authorizations\Basic::getMustBeAnonymous($app));
 
-$app->post("/register", "App\Controller\UserCtr::create")
+$app->post("/register", "users.controller:create")
         ->bind("registeruser")
         ->before(App\Authorizations\Basic::getMustBeAnonymous($app));
 

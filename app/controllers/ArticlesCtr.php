@@ -3,39 +3,46 @@
 namespace App\Controller {
 
     use Symfony\Component\HttpFoundation\Response;
-    use Silex\Application;
+    use Symfony\Component\HttpFoundation\Request;
+
+    use App\BusinessLogic\ArticlesLogic;
 
     class ArticlesCtr extends BaseController {
 
-        function index(Application $app) {
-            $articles = $app["article_manager"]->getAll();
-            return $app->json($articles);
+        public function __construct(ArticlesLogic $manager)
+        {
+            $this->manager = $manager;
         }
 
-        function show(Application $app) {
-            $id = $app["request"]->get("id");
-            $article = $app["article_manager"]->get($id);
-            return $app->json($article);
+        function index(Request $req) {
+            $articles = $this->manager->getAll();
+            return $this->json($articles);
         }
 
-        function create(Application $app) {
-            $id = $app["request"]->get("id");
-            $data = $app["request"]->get("body");
-            $article = $app["article_manager"]->create($data);
-            return $app->json($article);
+        function show(Request $req) {
+            $id = $req->get("id");
+            $article = $this->manager->get($id);
+            return $this->json($article);
         }
 
-        function destroy(Application $app) {
-            $id = $app["request"]->get("id");
-            $article = $app["article_manager"]->destroy($id);
-            return $app->json($article);
+        function create(Request $req) {
+            $id = $req->get("id");
+            $data = $req->get("body");
+            $article = $this->manager->create($data);
+            return $this->json($article);
         }
 
-        function update(Application $app) {
-            $id = $app["request"]->get("id");
-            $data = $app["request"]->get("body");
-            $article = $app["article_manager"]->update($id, $data);
-            return $app->json($article);
+        function destroy(Request $req) {
+            $id = $req->get("id");
+            $article = $this->manager->destroy($id);
+            return $this->json($article);
+        }
+
+        function update(Request $req) {
+            $id = $req->get("id");
+            $data = $req->get("body");
+            $article = $this->manager->update($id, $data);
+            return $this->json($article);
         }
     }
 }

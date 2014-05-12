@@ -1,5 +1,7 @@
 <?php
 
+$app->register(new Silex\Provider\ServiceControllerServiceProvider());
+
 $app->register(new Silex\Provider\TwigServiceProvider(), array(
     "twig.path" => array(APP_ROOT . "/views/"), "twig.options" => array(
         "cache" => ROOT . "/temp/twig",
@@ -19,7 +21,6 @@ $app->register(new \Silex\Provider\SessionServiceProvider(), array(
 ));
 
 $app->register(new Silex\Provider\UrlGeneratorServiceProvider());
-
 
 
 // Register Doctrine DBAL

@@ -3,35 +3,44 @@
 namespace App\Controller {
 
     use Symfony\Component\HttpFoundation\Response;
-    use Silex\Application;
+    use Symfony\Component\HttpFoundation\Request;
+
+    use App\BusinessLogic\UsersLogic;
+
 
     class UserCtr extends BaseController {
 
-        function loggedin(Application $app) {
-            $logged = $app["user_manager"]->isLogged();
-            return $app->json($logged);
+
+        public function __construct(UsersLogic $manager)
+        {
+            $this->manager = $manager;
         }
 
-        function logout(Application $app) {
-            $response = $app["user_manager"]->logout();
-            return $app->json($response);
+        function loggedin(Request $req) {
+            $logged = $this->manager->isLogged();
+            return $this->json($logged);
         }
 
-        function login(Application $app) {
-            $data = $app["request"]->get("body");
-            $user = $app["user_manager"]->login($data);
+        function logout(Request $req) {
+            $response = $this->manager->logout();
+            return $this->json($response);
+        }
+
+        function login(Request $req) {
+            $data = $req->get("body");
+            $user = $this->manager->login($data);
             if($user) {
-                return $app->json($user);
+                return $this->json($user);
             }
             else {
-                return new Response("Failed Login", 403);
+                return $this->unauthorized();
             }
         }
 
-        function create(Application $app) {
-            $data = $app["request"]->get("body");
-            $user = $app["user_manager"]->create($data);
-            return $app->json($user);
+        function create(Request $req) {
+            $data = $req->get("body");
+            $user = $this->manager->create($data);
+            return $this->json($user);
         }
     }
 }
