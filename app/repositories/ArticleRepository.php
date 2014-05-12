@@ -3,13 +3,19 @@
 namespace App\DataAccessLayer {
 
     use Doctrine\ORM\EntityRepository;
-    use App\Entity\Article;
+    use Doctrine\ORM\Mapping\ClassMetadata;
     use Exception;
 
     class ArticleRepository extends EntityRepository {
 
+        public function __construct($em, ClassMetadata $class) {
+            parent::__construct($em, $class);
+            $class = $this->getClassName();
+            $this->entity = new $class;
+        }
+
         public function getAll() {
-            return Article::createQuery()->getArrayResult();
+            return $this->entity->createQuery()->getArrayResult();
         }
 
         public function get($id) {
@@ -18,7 +24,7 @@ namespace App\DataAccessLayer {
         }
 
         public function create($data) {
-            $article = Article::create($data);
+            $article = $this->entity->create($data);
             $article->persist();
             return $article;
         }

@@ -3,9 +3,15 @@
 namespace App\DataAccessLayer {
 
     use Doctrine\ORM\EntityRepository;
-    use App\Entity\Article;
+    use Doctrine\ORM\Mapping\ClassMetadata;
 
     class UserRepository extends EntityRepository {
+
+        public function __construct($em, ClassMetadata $class) {
+            parent::__construct($em, $class);
+            $class = $this->getClassName();
+            $this->entity = new $class;
+        }
 
         public function getByEmailAndPass($email, $pass) {
             $user = $this->findOneBy(array("email" => $email, "password" => $pass));
@@ -13,7 +19,7 @@ namespace App\DataAccessLayer {
         }
 
         public function create($data) {
-            $user = User::create($data);
+            $user = $this->entity->create($data);
             $user->persist();
             return $user;
         }
