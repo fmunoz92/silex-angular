@@ -3,11 +3,12 @@
 namespace App\DataAccessLayer {
 
     use Doctrine\ORM\EntityRepository;
+    use Doctrine\ORM\EntityManager;
     use Doctrine\ORM\Mapping\ClassMetadata;
 
     class UserRepository extends EntityRepository {
 
-        public function __construct($em, ClassMetadata $class) {
+        public function __construct(EntityManager $em, ClassMetadata $class) {
             parent::__construct($em, $class);
             $class = $this->getClassName();
             $this->entity = new $class;
