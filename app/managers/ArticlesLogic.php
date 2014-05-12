@@ -14,9 +14,10 @@ namespace App\BusinessLogic {
         protected $dataAccess;
         protected $em;
 
-        public function __construct(EntityRepository $dataAccess, EntityManager $em) {
+        public function __construct(EntityRepository $dataAccess, $entity, EntityManager $em) {
             $this->dataAccess = $dataAccess;
             $this->em = $em;
+            $this->entity = $entity;
         }
 
         public function getAll() {
@@ -25,14 +26,15 @@ namespace App\BusinessLogic {
         }
 
         public function get($id) {
-            $article = $this->dataAccess->get($id);
+            $article = $this->dataAccess->find($id);
             $article = ($article)? $article->toArray() : null; 
             return $article;
         }
 
         public function create($data) {
             try {
-                $article = $this->dataAccess->create($data);
+                $article = $this->entity->create($data);
+                $article->persist();
                 $this->em->flush();
                 return $article->toArray();             
             } 
@@ -44,7 +46,9 @@ namespace App\BusinessLogic {
 
         public function update($id, $data) {
             try {
-                $article = $this->dataAccess->update($id, $data);
+                $article = $this->dataAccess->find($id);
+                $article->update($data);
+
                 $this->em->flush();
                 return $article->toArray();             
             } 
@@ -54,9 +58,15 @@ namespace App\BusinessLogic {
         }
 
         public function destroy($id) {
-            $article = $this->dataAccess->destroy($id);
-            $this->em->flush();
-            return $article->toArray();
+            $article = $this->dataAccess->find($id);
+            if($article) {
+                $article->remove();
+                $this->em->flush();
+                return $article->toArray();
+            }
+            else {
+                return array("err" => "Article not found");
+            }
         }
 
     }

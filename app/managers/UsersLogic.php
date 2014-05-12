@@ -14,8 +14,9 @@ namespace App\BusinessLogic {
         protected $dataAccess;
         protected $em;
 
-        public function __construct(EntityRepository $dataAccess, EntityManager $em, Session $session) {
+        public function __construct(EntityRepository $dataAccess, $entity, EntityManager $em, Session $session) {
             $this->dataAccess = $dataAccess;
+            $this->entity = $entity;
             $this->session = $session;
             $this->em = $em;
         }
@@ -39,7 +40,7 @@ namespace App\BusinessLogic {
         }
 
         public function create($data) {
-            $user = $this->dataAccess->create($data);
+            $user = $this->entity->create($data);
             $this->em->flush();
             return $user;
         }

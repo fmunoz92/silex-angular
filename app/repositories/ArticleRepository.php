@@ -9,42 +9,11 @@ namespace App\DataAccessLayer {
 
     class ArticleRepository extends EntityRepository {
 
-        public function __construct(EntityManager $em, ClassMetadata $class) {
-            parent::__construct($em, $class);
-            $class = $this->getClassName();
-            $this->entity = new $class;
+        public function getAll($alias = 'r') {
+            $query = $this->getEntityManager()->createQueryBuilder($alias)->select($alias)->from($this->getClassName(), $alias)->getQuery();
+            return $query->getArrayResult();
         }
 
-        public function getAll() {
-            return $this->entity->createQuery()->getArrayResult();
-        }
-
-        public function get($id) {
-            $article = $this->find($id);
-            return $article;
-        }
-
-        public function create($data) {
-            $article = $this->entity->create($data);
-            $article->persist();
-            return $article;
-        }
-
-        public function update($id, $data) {
-            $article = $this->find($id);
-            $article->update($data);
-            return $article;
-        }
-
-        public function destroy($id) {
-            $article = $this->find($id);
-            if($article) {
-                $article->remove();
-                return $article;
-            }
-            else 
-                return null;//throws exception
-        }
     }
 
 }
