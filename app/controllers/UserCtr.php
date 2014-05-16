@@ -5,13 +5,11 @@ namespace App\Controller {
     use Symfony\Component\HttpFoundation\Response;
     use Symfony\Component\HttpFoundation\Request;
 
-    use App\BusinessLogic\UsersLogic;
+    use App\BusinessLogic\BusinessLogic;
 
+    class UserCtr extends Controller {
 
-    class UserCtr extends BaseController {
-
-
-        public function __construct(UsersLogic $manager)
+        public function __construct(BusinessLogic $manager)
         {
             $this->manager = $manager;
         }

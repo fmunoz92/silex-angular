@@ -6,15 +6,18 @@ namespace App\BusinessLogic {
     use Doctrine\ORM\EntityManager;
     use Exception;
 
+    use App\Entity\Entity;
+
     /**
     * 
     */
-    class ArticlesLogic {
+    class ArticlesLogic extends BusinessLogic {
         
         protected $dataAccess;
         protected $em;
+        protected $entity;
 
-        public function __construct(EntityRepository $dataAccess, $entity, EntityManager $em) {
+        public function __construct(EntityRepository $dataAccess, Entity $entity, EntityManager $em) {
             $this->dataAccess = $dataAccess;
             $this->em = $em;
             $this->entity = $entity;
@@ -25,7 +28,7 @@ namespace App\BusinessLogic {
             return $all;
         }
 
-        public function get($id) {
+        public function get($id) {  
             $article = $this->dataAccess->find($id);
             $article = ($article)? $article->toArray() : null; 
             return $article;
@@ -59,12 +62,12 @@ namespace App\BusinessLogic {
 
         public function destroy($id) {
             $article = $this->dataAccess->find($id);
-            if($article) {
+            try {
                 $article->remove();
                 $this->em->flush();
                 return $article->toArray();
             }
-            else {
+            catch (Exception $e) {
                 return array("err" => "Article not found");
             }
         }

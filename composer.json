@@ -10,7 +10,9 @@
         "fmunoz92/serializable-entity-doctrine": "*"
     },
     "require-dev": {
-        "phpunit/phpunit": "*"
+        "phpunit/phpunit": "*",
+        "symfony/console": "*",
+        "symfony/browser-kit": "*"
     },
     "autoload": {
         "classmap": [

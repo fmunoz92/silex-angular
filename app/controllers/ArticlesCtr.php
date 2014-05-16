@@ -5,12 +5,11 @@ namespace App\Controller {
     use Symfony\Component\HttpFoundation\Response;
     use Symfony\Component\HttpFoundation\Request;
 
-    use App\BusinessLogic\ArticlesLogic;
+    use App\BusinessLogic\BusinessLogic;
 
-    class ArticlesCtr extends BaseController {
+    class ArticlesCtr extends Controller {
 
-        public function __construct(ArticlesLogic $manager)
-        {
+        public function __construct(BusinessLogic $manager) {
             $this->manager = $manager;
         }
 

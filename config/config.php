@@ -35,8 +35,8 @@ class Config implements ServiceProviderInterface {
         if(empty($env))
             $env = "development";
 
-        if($env != "production")
-            $app["debug"] = true;
+        //if($env != "production")
+        $app["debug"] = true;
 
         $jsonEnv = file_get_contents(ROOT . '/config/env/'. $env .'.json');
         $jsonAll = file_get_contents(ROOT . '/config/env/all.json');

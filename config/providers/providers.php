@@ -16,7 +16,7 @@ $app->register(new \Silex\Provider\MonologServiceProvider(), array(
 $app->register(new \Silex\Provider\SessionServiceProvider(), array(
     "session.storage.options" => array(
         "httponly" => true,
-        "domain"   => "app.com"
+        //"domain"   => "app.com"
     ),
 ));
 

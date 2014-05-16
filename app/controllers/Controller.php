@@ -9,7 +9,7 @@ namespace App\Controller {
     use Symfony\Component\HttpFoundation\JsonResponse;
     use Symfony\Component\HttpFoundation\Response;
 
-    class BaseController {
+    class Controller {
 
         public function err($errorMessage) {
             return array("status" => "error", "message" => $errorMessage);

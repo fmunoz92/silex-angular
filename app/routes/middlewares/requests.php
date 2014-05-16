@@ -8,11 +8,10 @@ $app->before(function(Symfony\Component\HttpFoundation\Request $req) use ($app) 
 $app->before(function(Symfony\Component\HttpFoundation\Request $req) use ($app) {
     $app["logger"]->info(print_r($req->request, true));
 
-    if (0 === strpos($req->headers->get('Content-Type'), 'application/json')) {
-        $data = json_decode($req->getContent(), true);
-        $req->request->replace(is_array($data) ? array("body" => $data) : array());
-        return $req;
-    }
+    $data = json_decode($req->getContent(), true);
+    $req->request->replace(is_array($data) ? array("body" => $data) : array());
+    return $req;
+
 });
 
 

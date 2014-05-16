@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding="UTF-8"?>
+<phpunit 
+    backupGlobals='false'
+    bootstrap="./tests/backendTests/bootstrap.php"
+    backupStaticAttributes="false"
+    convertNoticesToExceptions="true"
+    convertWarningsToExceptions="true"
+    processIsolation="false"
+    stopOnFailure="false"
+    colors="true"
+    stderr="true"
+    syntaxCheck="false">
+    <testsuites>
+        <testsuite name="app">
+            <directory>./tests/backendTests/controllers/</directory>
+            <directory>./tests/backendTests/entities/</directory>
+        </testsuite>
+    </testsuites>
+</phpunit>

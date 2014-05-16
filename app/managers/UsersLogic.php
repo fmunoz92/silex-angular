@@ -6,15 +6,17 @@ namespace App\BusinessLogic {
     use Doctrine\ORM\EntityManager;
     use Symfony\Component\HttpFoundation\Session\Session;
 
+    use App\Entity\Entity;
+
     /**
     * 
     */
-    class UsersLogic {
+    class UsersLogic extends BusinessLogic {
         
         protected $dataAccess;
         protected $em;
 
-        public function __construct(EntityRepository $dataAccess, $entity, EntityManager $em, Session $session) {
+        public function __construct(EntityRepository $dataAccess, Entity $entity, EntityManager $em, Session $session) {
             $this->dataAccess = $dataAccess;
             $this->entity = $entity;
             $this->session = $session;
@@ -41,8 +43,9 @@ namespace App\BusinessLogic {
 
         public function create($data) {
             $user = $this->entity->create($data);
+            $user->persist();
             $this->em->flush();
-            return $user;
+            return $user->toArray();
         }
     }
 

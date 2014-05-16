@@ -2,9 +2,6 @@
 
 use App\Entity\Article;
  
- /**
- * @backupGlobals disabled
- */
 class ArticleTest extends \PHPUnit_Framework_TestCase
 {
     public function setUp() {
@@ -65,6 +62,4 @@ class ArticleTest extends \PHPUnit_Framework_TestCase
         $this->fail('Empty title validation is not working');   
     }
 }
-
-
 ?>
