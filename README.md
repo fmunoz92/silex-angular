@@ -33,7 +33,7 @@ Change SILEX_MODE to development.
 
 ## Run tests
 ```
-$ php vendor/bin/phpunit --colors --bootstrap tests/backendTests/bootstrap.php tests/backendTests/*/*
+$ php vendor/bin/phpunit
 ```
 
 ## Run server
